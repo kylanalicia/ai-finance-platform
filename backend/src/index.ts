@@ -7,6 +7,7 @@ import { errorHandler } from "./middlewares/errorHandler.middleware";
 import { BadRequestException } from "./utils/app-error";
 import { asyncHandler } from "./middlewares/asyncHandler.middleware";
 import connectDatabase from "./config/database.config";
+import authRoutes from "./routes/auth.route";
 
 const app = express();
 const BASE_PATH = Env.BASE_PATH;
@@ -27,6 +28,8 @@ app.get("/", asyncHandler (async(req: Request, res: Response, next: NextFunction
       message: "Welcome to AI Finance Platform Backend!",
     });
 }));
+
+app.use(`${BASE_PATH}/auth`, authRoutes);
 
 app.use(errorHandler);
 
